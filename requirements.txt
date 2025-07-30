@@ -1,0 +1,117 @@
+# requirements.txt - Python Dependencies for MCP Sum Server
+# =====================================================
+#
+# Why do we need a separate requirements.txt file?
+# ================================================
+# 
+# 1. DEPENDENCY MANAGEMENT:
+#    - Python projects often depend on external libraries (packages)
+#    - requirements.txt is the standard way to specify these dependencies
+#    - It ensures everyone running this code has the same library versions
+#    - Without this file, users would get "ModuleNotFoundError" when trying to run the server
+#
+# 2. REPRODUCIBLE ENVIRONMENTS:
+#    - Different versions of libraries can behave differently
+#    - By specifying exact versions, we ensure the code works the same everywhere
+#    - This prevents "it works on my machine" problems
+#    - Critical for production deployments and team collaboration
+#
+# 3. EASY INSTALLATION:
+#    - Users can install all dependencies with one command: pip install -r requirements.txt
+#    - No need to manually install each package one by one
+#    - Reduces setup friction for new users
+#
+# 4. VIRTUAL ENVIRONMENT SUPPORT:
+#    - Works seamlessly with Python virtual environments
+#    - Helps isolate this project's dependencies from other Python projects
+#    - Prevents dependency conflicts between different projects
+#
+# 5. DEPLOYMENT AUTOMATION:
+#    - CI/CD systems can automatically install dependencies
+#    - Docker containers can use this file to set up the environment
+#    - Cloud platforms often automatically detect and install from requirements.txt
+
+# Core MCP (Model Context Protocol) library
+# =========================================
+# This is the main library that provides all MCP server functionality
+# Version 1.0.0 is specified to ensure compatibility and reproducibility
+# Without this, our server wouldn't be able to:
+# - Handle MCP protocol communication
+# - Register tools and handle tool calls
+# - Communicate with MCP clients (like AI assistants)
+mcp==1.0.0
+
+# Why do we specify exact versions (==) instead of minimum versions (>=)?
+# ======================================================================
+# 
+# PROS of exact versions (==):
+# - Guaranteed reproducibility - same behavior everywhere
+# - No surprises from automatic updates
+# - Easier to debug issues since everyone has same versions
+# - Better for production stability
+#
+# CONS of exact versions (==):
+# - Don't automatically get bug fixes and security updates
+# - May conflict with other projects that need different versions
+# - Require manual updates to get new features
+#
+# ALTERNATIVE APPROACHES:
+# - Compatible versions: mcp~=1.0.0 (allows 1.0.1, 1.0.2, but not 1.1.0)
+# - Minimum versions: mcp>=1.0.0 (allows any version 1.0.0 or higher)
+# - Version ranges: mcp>=1.0.0,<2.0.0 (allows 1.x but not 2.x)
+#
+# For this simple example, we use exact versions for maximum predictability
+
+# Additional dependencies that might be needed in the future:
+# ==========================================================
+# 
+# If you wanted to extend this server, you might add:
+#
+# # For more advanced JSON handling:
+# # pydantic==2.5.0
+# 
+# # For configuration management:
+# # python-dotenv==1.0.0
+# 
+# # For enhanced logging:
+# # structlog==23.2.0
+# 
+# # For HTTP-based MCP transport (instead of stdio):
+# # fastapi==0.104.1
+# # uvicorn==0.24.0
+#
+# # For testing:
+# # pytest==7.4.3
+# # pytest-asyncio==0.21.1
+
+# How to use this file:
+# ====================
+# 
+# 1. Create a virtual environment (recommended):
+#    python -m venv mcp_env
+#    source mcp_env/bin/activate  # On Windows: mcp_env\Scripts\activate
+#
+# 2. Install dependencies:
+#    pip install -r requirements.txt
+#
+# 3. Run the server:
+#    python mcp_sum_server.py
+#
+# 4. To update dependencies in the future:
+#    pip install --upgrade -r requirements.txt
+#
+# 5. To generate a new requirements.txt with current versions:
+#    pip freeze > requirements.txt
+
+# Note about Python version compatibility:
+# =======================================
+# This requirements.txt assumes Python 3.8 or higher
+# The MCP library requires modern Python features like:
+# - Type hints (introduced in Python 3.5, improved in 3.8+)
+# - Async/await syntax (Python 3.5+)
+# - Modern asyncio features (Python 3.7+)
+#
+# If you need to support older Python versions, you might need:
+# - Different library versions
+# - Alternative libraries
+# - Code modifications for compatibility
