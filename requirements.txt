@@ -1,2 +1,33 @@
+# requirements.txt - Python Dependencies File
+#
+# WHY THIS FILE EXISTS:
+# This file lists all the Python packages our MCP server needs to run.
+# When someone wants to use our server, they can install all dependencies
+# at once with: pip install -r requirements.txt
+#
+# WHY WE NEED A SEPARATE FILE:
+# 1. REPRODUCIBILITY: Everyone gets the exact same package versions
+# 2. SIMPLICITY: One command installs everything needed
+# 3. DOCUMENTATION: Clear list of what our project depends on
+# 4. VERSION CONTROL: We can track dependency changes over time
+# 5. DEPLOYMENT: Servers/containers can auto-install dependencies
+#
+# ALTERNATIVE APPROACHES:
+# - We could tell users "just install mcp and pydantic"
+# - But then they might get different versions and things might break
+# - Or they might forget to install something and get import errors
+#
+# FORMAT EXPLANATION:
+# package_name>=version_number means "at least this version or newer"
+# This ensures compatibility while allowing security updates
+
+# MCP (Model Context Protocol) - The core library for building MCP servers
+# This provides all the classes and functions we import in mcp_server.py
+# Without this, our imports like "from mcp.server import Server" would fail
 mcp>=1.0.0
+
+# Pydantic - Data validation library
+# We use this to automatically validate tool arguments (like checking that
+# 'a' and 'b' are actually numbers). It makes our code much safer and gives
+# better error messages than manual validation.
 pydantic>=2.0.0
